@@ -40,8 +40,10 @@ bool EnQueue(Queue &q, ElemType e) {
 }
 
 bool DeQueue(Queue &q, ElemType &e) {
-	if (IsEmpty(q)==true)
+	if (IsEmpty(q)==true){
+		printf("queue is Empty!\n");
 		return false;
+	}
 
 	e = q.data[q.front];
 	q.front = (q.front + 1)%MaxSize;
