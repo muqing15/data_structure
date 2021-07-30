@@ -16,8 +16,9 @@ bstTree init_bst(bstTree &T, int *num_array, int len);
 /* 
  * insert value into bst
  */
-bool insert(bstTree &T, ElemType e);
+bool insert(bstTree &T, ElemType key);
 bool range(bstTree T);
+bool insert_nonrecursive(bstTree &T, ElemType key);
 
 bstTree init_bst(bstTree &T, int *num_array, int len) {
 	if (!num_array) {
@@ -25,9 +26,44 @@ bstTree init_bst(bstTree &T, int *num_array, int len) {
 		return NULL;
 	}
 	for (int i=0; i<len; i++){
-		insert(T, num_array[i]);
+		insert_nonrecursive(T, num_array[i]);
 	}
 	return T;	
+}
+
+bool insert_nonrecursive(bstTree &T, ElemType key) {
+	bstNode *node = (bstNode*)malloc(sizeof(bstNode));
+	node->key = key;
+	node->lchild = node->rchild = NULL;
+
+	if (T == NULL) {
+		T = node;
+		return true;
+	}
+
+	bstNode *cur_node = T;
+	while (true) {
+		if (key == cur_node->key) {
+			printf("the value is same!\n");
+			return false;
+		} else if (key < cur_node->key) {
+			if (cur_node->lchild == NULL) {
+				cur_node->lchild = node;
+				break;
+			}
+			else 
+				cur_node = cur_node->lchild;
+		} else {
+			if (cur_node->rchild == NULL){
+				cur_node->rchild = node;
+				break;
+			}
+			else
+				cur_node = cur_node->rchild;
+		}
+	}
+	
+	return true;
 }
 
 bool insert(bstTree &T, ElemType key) {
