@@ -23,4 +23,5 @@ int main() {
 	while(n[index] != -1) {
 		printf("G.Vex[] is: %c\n", G.Vex[n[index++]]);
 	}
+	free(n);
 }
