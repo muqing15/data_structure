@@ -61,7 +61,7 @@ int* Neighbors(Mgraph *G, char v) {
 		return &index_v;
 	}
 
-	int neighbors[MaxVertexNum];
+	int *neighbors = (int*)malloc(MaxVertexNum * sizeof(int));
 	for(int i=0; i<MaxVertexNum; i++) {
 		neighbors[i] = -1;
 	}
