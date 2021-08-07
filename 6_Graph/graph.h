@@ -11,6 +11,14 @@ typedef struct Mgraph{
 
 //static int E[MaxVertexNum][MaxVertexNum];
 
+int Adjacent(Mgraph G, char v) {
+	for(int i=0; i<G.vexnum; i++) {
+		if (G.Vex[i]==v) return i;
+	}
+
+	return -1;
+}
+
 void InitMgraph(Mgraph *G) {
 	for (int i=0; i<MaxVertexNum; i++) {
 		for (int j=0; j<MaxVertexNum; j++) {
@@ -49,17 +57,9 @@ void AddEdge(Mgraph &G, int *E, char v, char x) {
 
 // 列出与顶点v相邻的顶点
 int* Neighbors(Mgraph *G, char v) {
-	int index_v = -1;
-	for (int i=0; i<G->vexnum; i++) {
-		if (G->Vex[i] == v) {
-			index_v = i;
-		}
-	}
+	int index_v = Adjacent(*G, v);
 
-	if (index_v == -1) {
-		printf("index_v is -1!\n");
-		return &index_v;
-	}
+	if (index_v == -1) return NULL;
 
 	int *neighbors = (int*)malloc(MaxVertexNum * sizeof(int));
 	for(int i=0; i<MaxVertexNum; i++) {

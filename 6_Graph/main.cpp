@@ -12,6 +12,8 @@ int main() {
 	InsertVexTex(&G, 'c');
 	InsertVexTex(&G, 'd');
 
+	printf("the localtion of a is: %d\n", Adjacent(G, 'a'));
+
 	AddEdge(G, *G.Edge, 'a', 'b');
 	AddEdge(G, *G.Edge, 'a', 'd');
 	AddEdge(G, *G.Edge, 'b', 'c');
