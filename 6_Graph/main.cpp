@@ -19,9 +19,12 @@ int main() {
 	AddEdge(G, *G.Edge, 'a', 'd');
 	AddEdge(G, *G.Edge, 'b', 'c');
 
-	printf("edge is: %d\n", G.Edge[1][2]);
 
 	int* n = Neighbors(&G, 'a');
+
+	for(int i=0; i<5; i++) {
+		printf("%d\n", n[i]);
+	}
 
 	int index = 0;
 	while(n[index] != -1) {

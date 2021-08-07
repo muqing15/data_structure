@@ -39,10 +39,9 @@ void AddEdge(Mgraph &G, int *E, char v, char x) {
 	}
 
 	//E[v][x] = 1;
-	*(E+v*MaxVertexNum+x) = 1;
+	*(E+index_v*MaxVertexNum+index_x) = 1;
 	//E[x][v] = 1;
-	*(E+x*MaxVertexNum+v) = 1;
-	printf("G.Edge[%d][%d] = 1\n", index_v, index_x);
+	*(E+index_x*MaxVertexNum+index_v) = 1;
 
 	G.arcnum ++;	
 }
@@ -67,10 +66,10 @@ int* Neighbors(Mgraph *G, char v) {
 		neighbors[i] = -1;
 	}
 
+	int index_ngb = 0;
 	for (int i=0; i<G->vexnum; i++) {
 		if (G->Edge[index_v][i] == 1) {
-			printf("邻边为:%d\n", i);
-			neighbors[i] = i;
+			neighbors[index_ngb++] = i;
 		}
 	}
 
