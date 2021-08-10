@@ -11,7 +11,7 @@
 #### 5.3. 排序树
 
 ### 6、图
-6.1. 邻接表
+#### 6.1. 邻接表
 * InsertTexVex(G, v)  插入顶点
 * AddEdge(G, v, x)  添加边
 * Neighbor(G, v)  查找v的相邻节点
