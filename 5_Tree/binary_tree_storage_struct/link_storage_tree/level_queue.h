@@ -31,7 +31,7 @@ void InitQueue(Queue &q){
 void EnQueue(Queue &q, Tree e) {
 	LiNode n = (LiNode)malloc(sizeof(Node));
 	n->data = e;
-    printf("%c\n", e->data);
+    n->next = NULL;
 	if (q.front == NULL) {
 		q.front = n;
 		q.rear = n;

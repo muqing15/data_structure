@@ -91,12 +91,13 @@ void PostOrder(Tree T) {
 void levelOrder(Tree T) {
     if(T==NULL) return;
 
-    TreeNode *p;
+    Tree p;
     Queue q;
     InitQueue(q);
     EnQueue(q, T);
     while (!IsEmpty(q)){
         DeQueue(q, p);
+        //printf("the localtion of pointer which returned from Dequeue is: %p\n", p);
         visit(p);
         if(p->lchild!=NULL) 
             EnQueue(q, p->lchild);
