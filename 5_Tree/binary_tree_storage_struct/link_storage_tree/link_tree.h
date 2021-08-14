@@ -97,7 +97,6 @@ void levelOrder(Tree T) {
     EnQueue(q, T);
     while (!IsEmpty(q)){
         DeQueue(q, p);
-        printf("%c\n", p->data);
         visit(p);
         if(p->lchild!=NULL) 
             EnQueue(q, p->lchild);

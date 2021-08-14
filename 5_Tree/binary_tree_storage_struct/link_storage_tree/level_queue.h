@@ -19,7 +19,7 @@ typedef struct Queue{
 
 void InitQueue(Queue &q);
 void EnQueue(Queue &q, Tree e);
-bool DeQueue(Queue &q, Tree e);
+bool DeQueue(Queue &q, Tree &e);
 bool GetElem(Queue &q, Tree e);
 void Destory(Queue &q);
 
@@ -41,7 +41,7 @@ void EnQueue(Queue &q, Tree e) {
 	q.rear = n;
 }
 
-bool DeQueue(Queue &q, Tree e) {
+bool DeQueue(Queue &q, Tree &e) {
 	if (q.front == NULL)
 		return false;
 	LiNode n = q.front;
