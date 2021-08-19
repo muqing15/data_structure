@@ -6,7 +6,6 @@ int main() {
 	bstTree T;
 
 	init_bst(T, nums, sizeof(nums)/sizeof(ElemType));
-	//printf("the value of t is: %d\n", T->key);
 	range(T);
-	return true;
+	return 0;
 }

@@ -26,7 +26,7 @@ bstTree init_bst(bstTree &T, int *num_array, int len) {
 		return NULL;
 	}
 	for (int i=0; i<len; i++){
-		insert_nonrecursive(T, num_array[i]);
+		insert(T, num_array[i]);
 	}
 	return T;	
 }
@@ -67,13 +67,17 @@ bool insert_nonrecursive(bstTree &T, ElemType key) {
 }
 
 bool insert(bstTree &T, ElemType key) {
+	printf("the value of num_array[] is: %d\n", key);
 	if (T==NULL) {
 		T = (bstNode*)malloc(sizeof(bstNode));
+		if (!T) {
+			printf("malloc Tree failed!\n");
+			return false;
+		}
 		T->key = key;
 		T->lchild = T->rchild = NULL;
 		return true;
 	}
-
 	if(key == T->key) {
 		printf("the value is same!\n");
 		return false;
@@ -83,8 +87,6 @@ bool insert(bstTree &T, ElemType key) {
 		return insert(T->lchild, key);
 	else 
 		return insert(T->rchild, key);
-
-	return true;
 }
 
 // 使用中序遍历输出值
