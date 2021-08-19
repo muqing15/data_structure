@@ -67,13 +67,8 @@ bool insert_nonrecursive(bstTree &T, ElemType key) {
 }
 
 bool insert(bstTree &T, ElemType key) {
-	printf("the value of num_array[] is: %d\n", key);
 	if (T==NULL) {
 		T = (bstNode*)malloc(sizeof(bstNode));
-		if (!T) {
-			printf("malloc Tree failed!\n");
-			return false;
-		}
 		T->key = key;
 		T->lchild = T->rchild = NULL;
 		return true;
@@ -93,10 +88,18 @@ bool insert(bstTree &T, ElemType key) {
 bool range(bstTree T) {
 	if (T == NULL )
 		return true;
-
 	range(T->lchild);
-	printf("the value of t is: %d\n", T->key);
+	printf("%d ", T->key);
 	range(T->rchild);
 
 	return true;
+}
+
+bstNode *BST_Search(bstTree T, ElemType key) {
+	while(T != NULL && T->key != key) {
+		if (T->key < key) T = T->rchild;
+		else T = T->rchild;
+	}
+
+	return T;
 }
