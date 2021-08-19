@@ -72,6 +72,27 @@ void PreOrder(Tree T) {
     }
 }
 
+void PreOrder2(Tree T) {
+    if (T==NULL) return;
+
+    LinkStack S;
+    InitStack(S);
+
+    Tree p = T;
+    while(p != NULL || !StackEmpty(S)) {
+        if (p) {
+            visit(p);
+            Push(S, p);
+            p = p->lchild;
+        } else {
+            Pop(S, p);
+            p = p->rchild; 
+        }
+    }
+
+    DestoryStack(S);
+}
+
 void InOrder(Tree T) {
     if (T!=NULL) {
         InOrder(T->lchild);
@@ -80,11 +101,56 @@ void InOrder(Tree T) {
     }
 }
 
+void InOrder2(Tree T) {
+    LinkStack S;
+    InitStack(S);
+
+    Tree p = T;
+    while(p || !StackEmpty(S)){
+        if(p) {
+            Push(S, p);
+            p = p->lchild; 
+        } else {
+            Pop(S, p);
+            visit(p);
+            p = p->rchild;
+        }
+    }
+
+    DestoryStack(S);
+}
+
 void PostOrder(Tree T) {
     if(T!=NULL) {
         PostOrder(T->lchild);
         PostOrder(T->rchild);
         visit(T);
+    }
+}
+
+void PostOrder2(Tree T) {
+    if (T == NULL) return;
+
+    LinkStack S;
+    InitStack(S);
+
+    Tree p = T, r=NULL; 
+
+    while(p || !StackEmpty(S)) {
+        if (p) {
+            Push(S, p);
+            p = p->lchild;  // 最左边的孩子结点全部入列
+        } else {
+            GetTop(S, p);
+            if (p->rchild && p->rchild != r) { // 如果p的右孩子存在且没有被访问过
+                p = p->rchild;
+            } else {
+                Pop(S, p);
+                visit(p);
+                r = p;
+                p = NULL;
+            }
+        }
     }
 }
 
@@ -105,4 +171,39 @@ void levelOrder(Tree T) {
             EnQueue(q, p->rchild);
     }
     Destory(q);
+}
+
+
+// 使用递归的方法寻找节点之间的路径
+bool get_path(LinkStack &S, Tree t, ElemType target) {
+    if (t == NULL) return false;
+
+    Push(S, t);
+
+    if (t->data == target)
+        return true;
+    if (get_path(S, t->lchild, target))
+        return true;
+    if (get_path(S, t->rchild, target))
+        return true;
+
+    Pop(S, t);
+    //printf("link_tree.h pop t is: %c\n", t->data);
+    return false;
+}
+
+void get_target_path(Tree t, ElemType target) {
+    LinkStack S;
+    InitStack(S);
+
+    get_path(S, t, target);
+
+    Tree node;
+    while(!StackEmpty(S)) {
+        Pop(S, node);
+        printf("%c", node->data);
+    }
+
+    printf("\n");
+    DestoryStack(S);
 }

@@ -23,6 +23,18 @@ bool DeQueue(Queue &q, Tree &e);
 bool GetElem(Queue &q, Tree e);
 void Destory(Queue &q);
 
+typedef struct LinkNode {
+	Tree data;
+	struct LinkNode *next;
+}LinkNode, *LinkStack;
+
+void InitStack(LinkStack &S);
+bool Push(LinkStack &S, Tree t);
+bool Pop(LinkStack &S, Tree &t);
+bool GetTop(LinkStack &S, Tree &t);
+bool StackEmpty(LinkStack &S);
+bool DestoryStack(LinkStack &S);
+
 void InitQueue(Queue &q){ 
 	q.front = NULL;
 	q.rear = NULL;
@@ -78,4 +90,54 @@ void Destory(Queue &q) {
 		q.front = n->next;
 		free(n);
 	}
+}
+
+void InitStack(LinkStack &S) {
+	S=NULL;
+}
+
+bool Push(LinkStack &S, Tree t) {
+	LinkStack n = (LinkStack) malloc(sizeof(LinkNode));
+	n->data = t;
+	n->next = S;
+	S=n;
+	//printf("push %c\n", t->data);
+	return false;
+}
+
+bool Pop(LinkStack &S, Tree &t){
+	if (S == NULL )
+		return false;
+	LinkStack n = S;
+	t = n->data;
+	S = S->next; 
+	//printf("Pop %c\n", t->data);
+	free(n);
+	return false;
+}
+
+bool StackEmpty(LinkStack &S){
+	if (S == NULL )
+		return true;
+	else
+		return false;
+}
+
+bool GetTop(LinkStack &S, Tree &t) {
+	if (S == NULL )
+		return false;
+	t = S->data;
+	return true;
+}
+
+bool DestoryStack(LinkStack &S) {
+	if (S == NULL )
+		return false;
+	LinkStack n = S;
+	while ( n != NULL ) {
+		S = S->next;
+		free (n) ;
+		n = S;
+	}
+	return true;
 }
