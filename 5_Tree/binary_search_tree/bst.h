@@ -17,8 +17,16 @@ bstTree init_bst(bstTree &T, int *num_array, int len);
  * insert value into bst
  */
 bool insert(bstTree &T, ElemType key);
-bool range(bstTree T);
+
+/*
+ * insert value into bst by nonrecursive
+ */
 bool insert_nonrecursive(bstTree &T, ElemType key);
+
+/*
+ * range nodes of bstTree by LNR
+ */
+bool range(bstTree T);
 
 bstTree init_bst(bstTree &T, int *num_array, int len) {
 	if (!num_array) {
@@ -102,4 +110,13 @@ bstNode *BST_Search(bstTree T, ElemType key) {
 	}
 
 	return T;
+}
+
+// 使用递归的方法解决查找问题
+bstNode *BST_Search2(bstTree T, ElemType key) {
+	if (T == NULL) return NULL;
+
+	if (T->key == key) return T;
+	else if (T->key < key) return BST_Search2(T->rchild, key);
+	else return BST_Search2(T->lchild, key); 
 }

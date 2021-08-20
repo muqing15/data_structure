@@ -13,7 +13,7 @@ int main() {
 	init_bst(T, nums, sizeof(nums)/sizeof(ElemType));
 	range(T);
 	printf("\n");
-	bstTree n = BST_Search(T, 6);
+	bstTree n = BST_Search2(T, 6);
 	printf("the result of search is: %d\n", n->key);
 	return 0;
 }
